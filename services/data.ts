@@ -24,18 +24,18 @@ import Enginer1 from "../public/images/Enginer1.png";
 import Enginer2 from "../public/images/Enginer2.png";
 import Enginer3 from "../public/images/Enginer3.png";
 import User1 from "../public/images/User1.png"
-import User2 from "../public/images/User2.jpg"
+import User2 from "../public/images/User7.png"
 import User3 from "../public/images/User3.png"
 import User4 from "../public/images/User7.png"
-import User5 from "../public/images/User5.jpeg"
-import User6 from "../public/images/User6.jpg"
+import User5 from "../public/images/User1.png"
+import User6 from "../public/images/User3.png"
 import User7 from "../public/images/User7.png"
 import User8 from "../public/images/User1.png"
-import User9 from "../public/images/User2.jpg"
-import User10 from "../public/images/User3.png"
+import User9 from "../public/images/User3.png"
+import User10 from "../public/images/User1.png"
 import User11 from "../public/images/User7.png"
-import User12 from "../public/images/User5.jpeg"
-import User13 from "../public/images/User6.jpg"
+import User12 from "../public/images/User3.png"
+import User13 from "../public/images/User1.png"
 import User14 from "../public/images/User7.png"
 
  const  ServicesFooter=[
