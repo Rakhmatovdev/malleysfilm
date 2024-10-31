@@ -38,8 +38,6 @@ import User12 from "../public/images/User5.jpeg"
 import User13 from "../public/images/User6.jpg"
 import User14 from "../public/images/User7.png"
 
-
-
  const  ServicesFooter=[
     {id:"1",path:"/",title:"Email marketing"},
     {id:"2",path:"/",title:"Campaigns"},
