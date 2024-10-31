@@ -1,4 +1,4 @@
-import ustun from "../../public/Vector.svg";
+import ustun from "@/public/Vector.svg";
 import { Services } from "@/services/data";
 import { ArrowRightOutlined, ArrowUpOutlined } from "@ant-design/icons";
 import Image from "next/image";

@@ -1,8 +1,8 @@
 "use client";
-import BGA from "../../public/images/About-bg.png";
-import BG from "../../public/images/bg-home.png";
-import logo from "../../public/Logo.svg";
-import ustun from "../../public/Vector.svg";
+import BGA from "@/public/images/About-bg.png";
+import BG from "@/public/images/bg-home.png";
+import logo from "@/public/Logo.svg";
+import ustun from "@/public/Vector.svg";
 import {
     AboutUsData,
     BlogData,

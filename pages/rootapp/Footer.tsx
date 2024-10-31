@@ -1,5 +1,5 @@
 'use client'
-import Logo from "../../public/Logo.svg";
+import Logo from "@/public/Logo.svg";
 import { AboutFooter, HelpsFooter, ServicesFooter } from "@/services/data";
 import { useForm, SubmitHandler } from "react-hook-form";
 import {

@@ -1,12 +1,12 @@
-import BG from "../../public/images/Rectangle-bg.png";
-import Hero from "../../public/images/Rectangle-hero.png";
-import logo from "../../public/Logo.svg";
-import ustun from "../../public/Vector.svg";
+import BG from "@/public/images/Rectangle-bg.png";
+import Hero from "@/public/images/Rectangle-hero.png";
+import logo from "@/public/Logo.svg";
+import ustun from "@/public/Vector.svg";
 import Navbar from "../rootapp/Navbar";
-import Mission1 from "../../public/images/Mission1.png";
-import Mission2 from "../../public/images/Mission2.png";
-import Vision1 from "../../public/images/Vision3.png";
-import Vision2 from "../../public/images/Vision4.png";
+import Mission1 from "@/public/images/Mission1.png";
+import Mission2 from "@/public/images/Mission2.png";
+import Vision1 from "@/public/images/Vision3.png";
+import Vision2 from "@/public/images/Vision4.png";
 import Image from "next/image";
 const AboutUI = () => {
   return (

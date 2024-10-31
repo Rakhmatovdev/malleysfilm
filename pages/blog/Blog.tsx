@@ -1,5 +1,5 @@
-import Fimage from "../../public/images/Featured-Image.png";
-import ustun from '../../public/Vector.svg';
+import Fimage from "@/public/images/Featured-Image.png";
+import ustun from '@/public/Vector.svg';
 import { BlogData } from "@/services/data";
 import { ArrowUpOutlined } from "@ant-design/icons";
 import Image from "next/image";

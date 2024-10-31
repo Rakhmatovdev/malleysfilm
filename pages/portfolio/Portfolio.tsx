@@ -1,6 +1,6 @@
-import Image3 from "../../public/Portfolio-Image3.png";
-import play from "../../public/Subtract.svg";
-import ustun from "../../public/Vector.svg";
+import Image3 from "@/public/Portfolio-Image3.png";
+import play from "@/public/Subtract.svg";
+import ustun from "@/public/Vector.svg";
 import Image from "next/image";
 import PortfolioR from "./PortfolioR";
 const PortfolioUI = () => {

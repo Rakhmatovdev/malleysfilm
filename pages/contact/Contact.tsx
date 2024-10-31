@@ -5,7 +5,7 @@ import {
   InstagramOutlined,
   TwitterOutlined,
 } from "@ant-design/icons";
-import BG from "../../public/Contact-Info.png";
+import BG from "@/public/Contact-Info.png";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type Inputs = {
