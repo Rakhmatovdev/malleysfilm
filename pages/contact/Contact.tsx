@@ -38,7 +38,7 @@ const ContactUI = () => {
             <div className="">
               <div className="sm:text-[28px] text-[18px]">Get Started</div>
               <div className="sm:text-[56px] sm:w-[750px] mt-8 w-[260px] sm:leading-[50px] sm:mt-8 sm:mb-16">
-                Get in touch with us. We're here to assist you.
+                Get in touch with us. We&apos;re here to assist you.
               </div>
             </div>
             <div className="flex sm:flex-col  sm:gap-y-6 gap-x-6 sm:gap-x-0 mt-[16px] sm:mt-0">
