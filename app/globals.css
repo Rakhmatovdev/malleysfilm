@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+} 
+
+@layer components {
+  .wrapper {
+    @apply container mx-auto px-2 sm:px-0;
+  }
+}
+@layer components {
+  .fij {
+    @apply flex items-center justify-between;
+  }
+}
+@layer components {
+  .Gradient {
+    @apply bg-gradient-to-t from-black via-[#304846]  to-[#304846];
+  }
+}
+@layer components {
+  .linker {
+    @apply border-[2px]  border-black  px-[3px] rounded-lg  text-sm font-bold
+  }
+}
+
+/* :root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+} */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.zindex{
+  z-index: 1000;
+}
+
+.-zindex{
+  z-index: -1000;
+}
