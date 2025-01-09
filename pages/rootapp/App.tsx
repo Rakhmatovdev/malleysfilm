@@ -170,15 +170,16 @@ const App = () => {
                     </div>
                 </div>
                 <div
-                    className=" mt-[31px] items-end flex sm:hidden flex-wrap mx-auto gap-y-2 px-5 justify-between relative   ">
+                    className=" mt-[31px] pb-4 items-end flex sm:hidden flex-wrap mx-auto gap-y-2 px-5 justify-between relative   ">
                     {AboutUsData.map((data) => (
                         <div key={data.id} className="relative text-white ">
                             <Image
-                                className="rounded-2xl"
+                                className="rounded-2xl w-[320px] h-[270px] sm:w-[156] sm:h-[154] "
                                 src={data.image}
                                 width={156}
                                 height={154}
                                 alt={data.name}
+                                
                             />
                             <div
                                 className="absolute left-1/2 top-1/2 mt-6 -translate-x-1/2 -translate-y-1/2 text-center">
