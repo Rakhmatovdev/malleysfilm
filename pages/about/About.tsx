@@ -13,7 +13,7 @@ const AboutUI = () => {
     <div className="">
       <section
         style={{ backgroundImage: `url(${BG.src})` }}
-        className="h-[360px] sm:w-screen sm:h-screen bg-center bg-cover "
+        className="h-[360px] sm:w-full sm:h-screen bg-center bg-cover "
       >
         <Navbar />
         <div className="sm:mt-[102px] mt-11 wrapper flex items-center gap-x-[17px] sm:gap-x-[134px]">

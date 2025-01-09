@@ -36,7 +36,7 @@ const App = () => {
     return (
         <>
             <section
-                className="h-[360px] w-screen sm:h-screen bg-cover bg-center relative"
+                className="h-[360px] w-full sm:h-screen bg-cover bg-center relative"
                 style={{backgroundImage: `url(${BG.src})`}}
             >
                 <Navbar/>
