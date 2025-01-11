@@ -30,7 +30,7 @@ const PortfolioR = () => {
       </div>
       <Link
         className="text-white text-[28px] hidden sm:flex"
-        href={"/portfolio"}
+        href={"/pages/portfolio"}
       >
         See All
       </Link>

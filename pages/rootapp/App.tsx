@@ -1,17 +1,15 @@
 "use client";
-import BGA from "@/public/images/About-bg.png";
-import BG from "@/public/images/bg-home.png";
-import logo from "@/public/Logo.svg";
-import ustun from "@/public/Vector.svg";
 import {
-    AboutUsData,
     BlogData,
     Bproject,
     Enginers,
     Ours,
-    OurTeam,
-    Users,
-} from "@/services/data";
+    OurTeam
+} from "@/assets/data";
+import BGA from "@/public/images/About-bg.png";
+import BG from "@/public/images/bg-home.png";
+import logo from "@/public/Logo.svg";
+import ustun from "@/public/Vector.svg";
 import {
     ArrowUpOutlined,
     LeftOutlined,
@@ -20,19 +18,48 @@ import {
 } from "@ant-design/icons";
 import Image from "next/image";
 import Link from "next/link";
-import {Swiper, SwiperSlide} from "swiper/react";
-import PortfolioR from "../portfolio/PortfolioR";
-import ServicesUI from "../servicesui/Services";
 import SwiperCore from "swiper/core";
 import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import PortfolioR from "../portfolio/PortfolioR";
+import ServicesUI from "../servicesui/Services";
 
 SwiperCore.use([Navigation, Pagination]);
 
-import {Rate} from "antd";
-import {Navigation, Pagination} from "swiper/modules";
+import { Rate } from "antd";
+import { Navigation, Pagination } from "swiper/modules";
 import Navbar from "./Navbar";
+import { useQuery } from "@tanstack/react-query";
+import restService from "@/lib/service";
+import ASkeleton from "./about/ASkleton";
+import AMobileSkeleton from "./about/MSkleton";
+import ReviewsSkeleton from "./about/MRSkleton";
+import { ReviewCardSkeleton1, ReviewCardSkeleton2, ReviewCardSkeleton3 } from "./about/RSkleton";
+import BlogsSkeleton from "./about/BSkleton";
 
 const App = () => {
+
+
+
+        const {data:about} = useQuery({
+           queryKey: ['about'],
+           queryFn: restService.about,
+         })
+        const {data:blogs} = useQuery({
+           queryKey: ['blogs'],
+           queryFn: restService.blogs,
+         })
+        const {data:reviews} = useQuery({
+           queryKey: ['reviews'],
+           queryFn: restService.reviews,
+         })
+      
+  const {data:services} = useQuery({
+    queryKey: ['services'],
+    queryFn: restService.services,
+  })
+  
+       
     return (
         <>
             <section
@@ -120,7 +147,7 @@ const App = () => {
                     className="wrapper w-full h-[219px]  p-2 sm:h-[781px] rounded-3xl  sm:rounded-[40px] sm:p-[66px] flex flex-col justify-end text-white bg-cover bg-center"
                     style={{backgroundImage: `url(${BGA.src})`}}
                 >
-                    <div className="flex">
+                   {about?(<div className="flex">
                         <div className=" h-full  w-[60%]">
                             <Image
                                 className="sm:mx-5 w-[33px] h-[26px] sm:w-[153px] sm:h-[108px]"
@@ -130,55 +157,48 @@ const App = () => {
                                 alt=""
                             />
                             <p className="text-base sm:text-[40px] text-[#C94552] tracking-wide sm:mt-8">
-                                About Us
+                                {about[0]?.title}
                             </p>
                             <p className="sm:mt-8 text-[12px] sm:text-[24px] tracking-wide line-clamp-6  ">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                {about[0]?.text}
                             </p>
                         </div>
                         <div className="items-end gap-x-8 hidden sm:flex  ">
-                            {AboutUsData.map((data) => (
+                            {about.map((data) => (
                                 <div key={data.id} className="relative ">
                                     <Image
                                         className=""
                                         src={data.image}
                                         width={242}
                                         height={266}
-                                        alt={data.name}
+                                        alt={data.title}
                                     />
                                     <div
-                                        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                                        className="absolute   left-1/2 top-[55%] -translate-x-1/2  -translate-y-1/2 text-center">
                                         <PlayCircleFilled
-                                            className="cursor-pointer sm:text-[40px] lg:text-[60px]  sm:mb-[20px] lg:mb-[44px]"/>
+                                            className="cursor-pointer  sm:text-[40px] lg:text-[60px]  mb-[10px]"/>
                                         <div className="flex flex-col  ">
-                                            {" "}
-                                            <p className="lg:text-[24px] lg:font-semibold ">
+                                            <p className=" lg:text-[14px] mt-0 lg:font-semibold ">
                                                 {data.title}
                                             </p>
-                                            <p className="w-28  ">{data.name}</p>
+                                           
                                         </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
-                    </div>
+                    </div>):<ASkeleton/>} 
                 </div>
-                <div
+               {about ?( <div
                     className=" mt-[31px] pb-4 items-end flex sm:hidden flex-wrap mx-auto gap-y-2 px-5 justify-between relative   ">
-                    {AboutUsData.map((data) => (
+                    {about.map((data) => (
                         <div key={data.id} className="relative text-white ">
                             <Image
                                 className="rounded-2xl w-[320px] h-[270px] sm:w-[156] sm:h-[154] "
                                 src={data.image}
                                 width={156}
                                 height={154}
-                                alt={data.name}
+                                alt={data.title}
                                 
                             />
                             <div
@@ -186,20 +206,23 @@ const App = () => {
                                 <PlayCircleFilled className="cursor-pointer text-[42px]  opacity-75"/>
                                 <div className="flex flex-col  ">
                                     <p className="text-[12px] w-40  mt-[26px]">
-                                        We Create Excellence
+                                       {data.title}
                                     </p>
                                 </div>
                             </div>
                         </div>
                     ))}
-                </div>
+                </div>):<AMobileSkeleton/>}
             </section>
+
+
+
             <section className="Gradient -z-50">
                 <div className="text-white wrapper pt-10 sm:pt-[136px]">
                     <div className="flex items-center sm:justify-center gap-2 ">
                         <Image
                             className="w-2 h-4 sm:w-6 sm:h-12"
-                            src={ustun.src}
+                            src={ustun}
                             width={24}
                             height={48}
                             alt="Ustun"
@@ -228,7 +251,7 @@ const App = () => {
                                 >
                                     <Image
                                         className="mt-[7px] ml-[14px] sm:mt-4 sm:ml-[22px] w-[9px] h-[15px] sm:w-[16px] sm:h-[32px]"
-                                        src={ustun.src}
+                                        src={ustun}
                                         width={16}
                                         height={32}
                                         alt="Ustun icon"
@@ -249,13 +272,13 @@ const App = () => {
 
                         {/*Left-card*/}
 
-                        <div className="relative left-card mt-[134px]">
+                       {reviews?( <div className="relative left-card mt-[134px]">
                             <div
                                 className="absolute bg-[#050505] rounded-lg h-[206px] w-[470px] items-center z-[10] left-0 bottom-0"/>
                             <div className="absolute min-w-[160px] w-[160px] h-[250px] z-[11] left-[30px] bottom-0">
                                 <Image
                                     className="rounded-2xl object-cover"
-                                    src={Enginers[0].image}
+                                    src={reviews[0].image}
                                     width={160}
                                     height={250}
                                     alt="Enginer photo"
@@ -265,33 +288,33 @@ const App = () => {
                                 <div className="flex items-center gap-x-2 ">
                                     <Rate
                                         disabled
-                                        defaultValue={Enginers[0].rating}
+                                        defaultValue={reviews[0].rating}
                                         className="text-white"
                                     />{" "}
                                     <p className="text-[#EEC5C9] text-[10px]">
-                                        {Enginers[0].rating}.0 rating
+                                        {reviews[0].rating}.0 rating
                                     </p>
                                 </div>
-                                <p className="mt-4 text-sm w-[254px]">{Enginers[0].desc}</p>
+                                <p className="mt-4 text-sm w-[254px] line-clamp-4">{reviews[0].text}</p>
                                 <p className="text-sm text-[#C94552] mt-4">
-                                    {Enginers[0].name}
+                                    {reviews[0].author}
                                 </p>
                                 <p className="text-sm text-[#C94552]">
-                                    {Enginers[0].profession}
+                                    {reviews[0].position}
                                 </p>
                             </div>
                             <div
                                 className="absolute w-[270px] rounded-3xl bg-[#B6414D] h-[127px]  -left-8 -bottom-[56px] z-[9]"/>
-                        </div>
+                        </div>):<ReviewCardSkeleton1/>}
 
                         {/*Middle-card*/}
-                        <div className="relative middle-card -translate-x-60">
+                       {reviews?( <div className="relative middle-card -translate-x-60">
                             <div
                                 className="absolute bg-[#050505] rounded-lg h-[206px] w-[470px] items-center z-[10] left-0 bottom-0"/>
                             <div className="absolute min-w-[160px] w-[160px] h-[250px] z-[11] left-[30px] bottom-0">
                                 <Image
                                     className="rounded-2xl object-cover"
-                                    src={Enginers[1].image}
+                                    src={reviews[1].image}
                                     width={160}
                                     height={250}
                                     alt="Enginer photo"
@@ -301,29 +324,29 @@ const App = () => {
                                 <div className="flex items-center gap-x-2 ">
                                     <Rate
                                         disabled
-                                        defaultValue={Enginers[1].rating}
+                                        defaultValue={reviews[1].rating}
                                         className="text-white"
                                     />{" "}
                                     <p className="text-[#EEC5C9] text-[10px]">
-                                        {Enginers[1].rating}.0 rating
+                                        {reviews[1].rating}.0 rating
                                     </p>
                                 </div>
-                                <p className="mt-4 text-sm w-[254px]">{Enginers[1].desc}</p>
+                                <p className="mt-4 text-sm w-[254px]">{reviews[1].text}</p>
                                 <p className="text-sm text-[#C94552] mt-4">
-                                    {Enginers[1].name}
+                                    {reviews[1].author}
                                 </p>
                                 <p className="text-sm text-[#C94552]">
-                                    {Enginers[1].profession}
+                                    {reviews[1].position}
                                 </p>
                             </div>
                             <div
                                 className=" absolute   w-[261px] h-[284px] rounded-3xl bg-[#237772] bottom-0 -left-40 "></div>
                             <div
                                 className=" absolute   w-[261px] h-[284px] rounded-3xl bg-[#237772] bottom-0  left-96 "></div>
-                        </div>
+                        </div>):<ReviewCardSkeleton2/>}
 
                         {/*Right-card*/}
-                        <div className="relative right-card -translate-x-[470px] mt-[134px]">
+                       {reviews?( <div className="relative right-card -translate-x-[470px] mt-[134px]">
                             <div
                                 className="absolute bg-[#050505] rounded-lg h-[206px] w-[470px] items-center z-[10] left-0 bottom-0"/>
                             <div className="absolute min-w-[160px] w-[160px] h-[250px] z-[11] left-[30px] bottom-0">
@@ -356,14 +379,14 @@ const App = () => {
                             </div>
                             <div
                                 className="absolute w-[270px] rounded-3xl bg-[#B6414D] h-[127px]  left-[232px] -bottom-[56px] z-[9]"/>
-                        </div>
+                        </div>):<ReviewCardSkeleton3/>}
                     </div>
                 </div>
 
                 {/*Reviews*/}
                 <div className="text-white wrapper">
-                    <div className="flex items-center sm:justify-center gap-x-2 ">
-                        <Image className={'w-2 h-4 sm:w-6 sm:h-12'} src={ustun.src} width={24} height={48} alt="Ustun"/>
+                    {/* <div className="flex items-center sm:justify-center gap-x-2 ">
+                        <Image className={'w-2 h-4 sm:w-6 sm:h-12'} src={ustun} width={24} height={48} alt="Ustun"/>
                         <p className="sm:text-[40px] font-semibold ">Reviews</p>
                     </div>
                     <p className="text-[18px] sm:text-center mt-4 sm:mt-10 tracking-wider">
@@ -381,8 +404,8 @@ const App = () => {
                                 />
                             </div>
                         ))}
-                    </div>
-                    <div className="flex sm:hidden justify-center items-center mt-6 gap-x-2">
+                    </div> */}
+                    {/* <div className="flex sm:hidden justify-center items-center mt-6 gap-x-2">
                         {Users.slice(0,4).map((user) => (
                             <div className="" key={user.id}>
                                 <Image
@@ -399,14 +422,15 @@ const App = () => {
                         </div>
 
 
-                    </div>
+                    </div> */}
+                    
                     <div className={"flex flex-col sm:hidden mt-[73px]"}>
-                        {Enginers.map((enginer) => (
+                        {reviews? reviews.map((enginer) => (
                             <div key={enginer.id} className={"relative h-[240px] flex justify-center  "}>
                                 <div
                                     className={"absolute bg-[#050505] rounded-lg h-[206px]  w-[328px] items-center z-[10]  top-0 "}/>
-                                <Image className={"absolute z-20 -top-4 left-10"} src={enginer.image}
-                                       alt={enginer.name} width={128} height={221}/>
+                                <Image className={"absolute z-20 -top-4  left-10"} src={enginer.image}
+                                       alt={enginer.author} width={128} height={221}/>
                                 <div className="absolute top-2 left-48 z-[11] ">
                                     <div className="flex items-center gap-x-2 ">
                                         <Rate
@@ -418,37 +442,37 @@ const App = () => {
                                             {enginer.rating}.0 rating
                                         </p>
                                     </div>
-                                    <p className="mt-2 text-[12px] w-[135px]">{enginer.desc}</p>
+                                    <p className="mt-2 text-[12px] w-[135px] line-clamp-5">{enginer.text}</p>
                                     <p className="text-sm text-[#C94552] mt-2">
-                                        {enginer.name}
+                                        {enginer.author}
                                     </p>
-                                    <p className="text-[12px] w-[138px] sm:w-full text-[#C94552]">
-                                        {enginer.profession}
+                                    <p className="text-[12px] w-[138px] sm:w-full text-[#C94552] line-clamp-1">
+                                        {enginer.position}
                                     </p>
                                 </div>
                                 <div className={"absolute  -right-2 -top-4 rounded-3xl bg-[#237772] w-[139px] h-[151px] z-[9]"}/>
                                 <div className={"absolute  -left-2 bottom-14  rounded-r-3xl bg-[#B6414D] w-[148px] h-[60px] z-[9]"}/>
-                            </div>))}
+                            </div>)):<ReviewsSkeleton/>}
                     </div>
 
-                    <div className="text-center sm:mt-[29px]">
+                    {/* <div className="text-center sm:mt-[29px]">
                         <p className="sm:text-[32px] text-lg">5.0 User Rating</p>
                         <Rate
                             defaultValue={5}
                             className="text-[#C94552] mt-2 sm:text-3xl"
                             disabled
                         />
-                    </div>
+                    </div> */}
                 </div>
 
                 {/*blog*/}
-                <div className="mt-[34px] sm:mt-[234px] text-white wrapper pb-[50px] sm:pb-40">
+                {blogs?(<div className="mt-[34px] sm:mt-[234px] text-white wrapper pb-[50px] sm:pb-40">
                     <div className="mt-10 sm:mt-[90px]">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-x-2">
                                 <Image
                                     className="w-2 h-4 sm:w-6 sm:h-12"
-                                    src={ustun.src}
+                                    src={ustun}
                                     width={24}
                                     height={46}
                                     alt="Blog section"
@@ -529,7 +553,7 @@ const App = () => {
                             </Swiper>
                         </div>
                     </div>
-                </div>
+                </div>):<BlogsSkeleton/>}
             </section>
         </>
     );

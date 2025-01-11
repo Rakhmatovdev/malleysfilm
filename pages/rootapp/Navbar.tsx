@@ -1,12 +1,12 @@
 "use client";
+import { NavLinks } from "@/assets/data";
+import { MenuOutlined } from "@ant-design/icons";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useDetectClickOutside } from "react-detect-click-outside";
 import logo from "/public/Logo.svg";
-import { MenuOutlined } from "@ant-design/icons";
-import Image from "next/image";
-import { NavLinks } from "@/services/data";
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const ref = useDetectClickOutside({ onTriggered: () => setToggle(false) });
@@ -17,7 +17,7 @@ const Navbar = () => {
       <div className="flex justify-between items-center  pt-10 ">
         <Link href={"/"} className="">
           <Image
-            src={logo.src}
+            src={logo}
             width={109}
             height={85}
             className="w-8 h-6 sm:w-[109px] sm:h-[85px]"
@@ -48,9 +48,9 @@ const Navbar = () => {
               );
             })}
           </ul>
-          <button className="py-2 text-[20px] px-9 rounded-xl bg-white hidden md:flex">
+          {/* <button className="py-2 text-[20px] px-9 rounded-xl bg-white hidden md:flex">
             Login
-          </button>
+          </button> */}
         </div>
 
         <div className="items-center gap-4 flex md:hidden ">

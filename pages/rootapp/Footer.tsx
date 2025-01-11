@@ -1,26 +1,43 @@
 'use client'
+import { AboutFooter, HelpsFooter, ServicesFooter } from "@/assets/data";
+import restService from "@/lib/service";
 import Logo from "@/public/Logo.svg";
-import { AboutFooter, HelpsFooter, ServicesFooter } from "@/services/data";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { Inputs } from "@/types/types";
 import {
   FacebookOutlined,
   InstagramOutlined,
   RightOutlined,
   TwitterOutlined
 } from '@ant-design/icons';
+import { useQuery } from "@tanstack/react-query";
 import Image from 'next/image';
 import Link from "next/link";
-import { Inputs } from "@/types/types";
+import { SubmitHandler, useForm } from "react-hook-form";
+import SocialLinksSkeleton from "./SocialLink";
 
 
 const Footer = () => {
   const { register, handleSubmit } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
+
+
+  const { isPending, error, data:footer} = useQuery({
+    queryKey: ['footer'],
+    queryFn: restService.footer,
+  })
+
+
+  console.log(footer);
+  
+
+ if(error){
+   return <div>Error...</div>
+ }
   return (
     <div className=' text-white bg-gradient-to-t from-[#0C8386]  to-[#2F5A5B]'>
       <div className=" ">
    <div className=" pt-11 fij wrapper">
-    <Link href={"/"} className="sm:ml-[151px]"><Image src={Logo.src} width={109} height={85} className="w-[55px] h-[43px] sm:w-[109px] sm:h-[85px] cursor-pointer" alt='Logo'/></Link>
+    <Link href={"/"} className="sm:ml-[151px]"><Image src={Logo} width={109} height={85} className="w-[55px] h-[43px] sm:w-[109px] sm:h-[85px] cursor-pointer" alt='Logo'/></Link>
     <div className="sm:fij gap-20">
       <p className="sm:text-[22px] text-sm text-center ">Ready to get started?</p>
       <button className='py-4 px-16 bg-red-400 text-white font-semibold text-sm sm:text-[17px] rounded-lg mt-2 sm:mt-0'>Get started</button>
@@ -77,11 +94,12 @@ const Footer = () => {
           <p>Terms & Conditions</p>
           <p>Privacy Policy</p>
         </div>
-        <div className="gap-2 hidden sm:flex">
-        <FacebookOutlined className={"cursor-pointer text-xl"} />
-        <TwitterOutlined  className={"cursor-pointer text-xl"}/>
-        <InstagramOutlined className={"cursor-pointer text-xl"} />
-        </div>
+    {footer ?   ( <div className="gap-2 hidden sm:flex">
+      <Link href={footer[0]?.path} className=""> <FacebookOutlined className={"cursor-pointer text-xl"} /></Link>
+      <Link href={footer[1]?.path} className=""> <TwitterOutlined  className={"cursor-pointer text-xl"}/></Link> 
+      <Link href={footer[2]?.path} className=""> <InstagramOutlined className={"cursor-pointer text-xl"} /></Link>
+        </div>):<SocialLinksSkeleton/>
+        }
 
       </div>
     </div>

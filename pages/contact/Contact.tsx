@@ -5,8 +5,9 @@ import {
   InstagramOutlined,
   TwitterOutlined,
 } from "@ant-design/icons";
-import BG from "@/public/Contact-Info.png";
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+
 
 type Inputs = {
   name: string,
@@ -15,21 +16,18 @@ type Inputs = {
   message:string
 };
 
-type Input2={
-  email:string
-}
 
 const ContactUI = () => {
   const { register, handleSubmit } = useForm<Inputs>();
-  const { register: register2, handleSubmit: handleSubmit2 } = useForm<Input2>();
+const [email, setEmail] = useState('')
 
-  const onSubmit1: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log("Submit 1:", data);
   };
-
-  const onSubmit2: SubmitHandler<Input2> = (data) => {
+  const onSubmit2 = (data:any) => {
     console.log("Submit 2:", data);
   };
+
   return (
     <div className="Gradient">
       <div className="wrapper text-white mt-10 sm:mt-36">
@@ -53,7 +51,7 @@ const ContactUI = () => {
             </button>
           </div>
         </div>
-        <form onSubmit={handleSubmit(onSubmit1)} className="flex flex-col gap-y-12 mt-[58px] sm:mt-[120px]">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-12 mt-[58px] sm:mt-[120px]">
           <div className="flex flex-col sm:flex-row sm:fij gap-y-8 sm:gap-x-8">
             <input
               type="text"
@@ -92,14 +90,11 @@ const ContactUI = () => {
           </button>
         </form>
       </div>
-      <div
-        className="px-2 mt-12 sm:h-[421px] sm:mt-[129px] bg-center bg-cover"
-        style={{
-          backgroundImage: `url(${BG.src})`,
-         
-        }}
+      <div className="px-2 mt-12 sm:h-[421px] sm:mt-[129px] bg-center bg-cover relative z-0 bg-white"
       >
-        <div className=" flex sm:justify-center py-20 sm:gap-x-[69px] flex-col sm:flex-row ">
+          
+
+        <div className=" flex sm:justify-center py-20 sm:gap-x-[69px] flex-col sm:flex-row z-50">
           <div className="">
             <div className="sm:text-2xl">Contact Info</div>
             <div className="sm:text-5xl sm:w-[470px] font-semibold mt-6">
@@ -147,8 +142,8 @@ const ContactUI = () => {
             newsletter.
           </p>
         </div>
-        <form onSubmit={handleSubmit2(onSubmit2)} className="sm:w-[550px] h-[47px] sm:h-[84px] flex flex-row mt-6  sm:mt-0 w-full">
-          <input type="text" className="rounded-l-xl bg-[#5a6666] outline-none placeholder:text-white text-[18px] p-6 w-full" placeholder="Enter your email"{...register2("email")}/>
+        <form onSubmit={onSubmit2} className="sm:w-[550px] h-[47px] sm:h-[84px] flex flex-row mt-6  sm:mt-0 w-full">
+          <input type="text" className="rounded-l-xl bg-[#5a6666] outline-none placeholder:text-white text-[18px] p-6 w-full" placeholder="Enter your email"/>
           <button type="submit" className="px-2  sm:p-6 bg-white rounded-r-xl sm:text-[18px] text-[#1A3231]">Subscribe</button>
         </form>
       </div>

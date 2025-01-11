@@ -1,15 +1,34 @@
+'use client'
+import { BlogData } from "@/assets/data";
+import restService from "@/lib/service";
 import Fimage from "@/public/images/Featured-Image.png";
 import ustun from '@/public/Vector.svg';
-import { BlogData } from "@/services/data";
 import { ArrowUpOutlined } from "@ant-design/icons";
+import { useQuery } from "@tanstack/react-query";
+import { format } from "date-fns";
 import Image from "next/image";
+import BlogSkeleton from "./BlogSkleton";
 
 const BlogUI = () => {
+  // const { isPending, error, data:blogs } = useQuery({
+  //   queryKey: ['blogs'],
+  //   queryFn: restService.blogs,
+  // })
+
+    // const blog1:{date:string}=blogs?.splice(0,1)[0]
+    // console.log(blog1);
+    
+
+    // if(isPending){
+    //  return (<BlogSkeleton/>)
+    // }
+  
+  
   return (
     <div className="Gradient">
-      <div className="pt-10 sm:pt-24 text-white wrapper  pb-[145px]">
-        <div className="">
-          <p className="sm:text-[18px] font-bold">Sunday, 1 Jan 2023</p>
+   <div className="pt-10 sm:pt-24 text-white wrapper  pb-[145px]">
+      ( <div className="">
+          <p className="sm:text-[18px] font-bold">1 January 2023</p>
           <p className="text-red-500 font-bold text-2xl tracking-wide  sm:text-[48px] mt-6 w-[300px] sm:w-full">Bill Walsh leadership lessons</p>
           <p className="text-sm tracking-wide sm:text-[22px] leading-8 mt-4 line-clamp-4 sm:line-clamp-none">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -25,8 +44,9 @@ const BlogUI = () => {
             ea commodo consequat. Duis aute irure dolor in reprehenderit in
             voluptate
           </p>
-          <div className="mt-5 sm:mt-[41px] sm:w-full sm:h-full  "><Image className="rounded-2xl bg-transparent bg-cover bg-center   sm:h-min " src={Fimage.src} height={645} width={1728} alt="Featured image Blog"/></div>
-        </div>
+          <div className="mt-5 sm:mt-[41px] sm:w-full sm:h-full  "><Image className="rounded-2xl bg-transparent bg-cover bg-center   sm:h-min " src={Fimage} height={645} width={1728} alt="Featured image Blog"/></div>
+        </div>)
+        
         <div className="mt-10 sm:mt-[90px]">
          <div className="flex items-center gap-x-2">
           <Image className="w-2 h-4 sm:w-6 sm:h-12" src={ustun.src} width={24} height={46} alt="Blog section" />
@@ -35,7 +55,8 @@ const BlogUI = () => {
          <div className="pt-6 grid justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 sm:gap-x-10  md:gap-x-12 lg:gap-x-14 gap-y-[71px]">
           {BlogData.map((blog)=><div key={blog.id} className="" >
             <Image src={blog.image} width={385} height={240} alt={blog.title}/>
-            <p className="mt-8 text-sm font-bold">{blog.createdAt}</p>
+            <p className="mt-8 text-sm font-bold">1 Jasuary 2023</p>  
+            {/* { format(blog1?.date,'dd MMMM yyyy')} */}
            <div className="mt-3 fij">
            <p className=" text-[20px] font-bold">{blog.title}</p>
            <ArrowUpOutlined className="rotate-45 text-xl mt-2 cursor-pointer"/>
