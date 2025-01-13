@@ -1,5 +1,4 @@
 'use client'
-import { Services } from "@/assets/data";
 import restService from "@/lib/service";
 import ustun from "@/public/Vector.svg";
 import { ArrowRightOutlined } from "@ant-design/icons";

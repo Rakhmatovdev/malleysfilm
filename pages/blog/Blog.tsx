@@ -1,7 +1,5 @@
 'use client'
-import { BlogData } from "@/assets/data";
 import restService from "@/lib/service";
-import Fimage from "@/public/images/Featured-Image.png";
 import ustun from '@/public/Vector.svg';
 import { ArrowUpOutlined } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";

@@ -2,18 +2,8 @@
 import Link from 'next/link'
 import ustun from "@/public/Vector.svg";
 import Image from 'next/image';
-import Image1 from "@/public/Portfolio-Image1.png";
-import Image2 from "@/public/Portfolio-Image2.png";
-import Image3 from "@/public/Portfolio-Image3.png";
-import Image4 from "@/public/Portfolio-Image4.png";
-import Image5 from "@/public/Portfolio-Image5.png";
-import Image6 from "@/public/Portfolio-Image6.png";
-import Image7 from "@/public/Portfolio-Image7.png";
-import Image8 from "@/public/Portfolio-Image8.png";
-import play from "@/public/Subtract.svg";
 import { useQuery } from '@tanstack/react-query';
 import restService from '@/lib/service';
-import PSkleton from './PSkleton';
 import SPortfolio from './PSkleton';
 
 const PortfolioR = () => {

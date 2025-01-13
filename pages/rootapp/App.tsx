@@ -1,5 +1,5 @@
 "use client";
-import {  Bproject, Ours,} from "@/assets/data";
+import {Ours} from "@/assets/data";
 import BGA from "@/public/images/About-bg.png";
 import BG from "@/public/images/bg-home.png";
 import logo from "@/public/Logo.svg";

@@ -32,39 +32,6 @@ const Projects = () => {
     queryFn: restService.projects,
   })
 
-  const getYouTubeThumbnail = (videoUrl: string) => {
-    if (!videoUrl) {
-      console.error('Invalid video URL:', videoUrl)
-      return '/default-thumbnail.jpg' // Provide a valid default thumbnail URL
-    }
-
-    try {
-      const url = new URL(videoUrl)
-
-      // For youtu.be short URLs
-      if (url.hostname === 'youtu.be') {
-        const videoId = url.pathname.split('/')[1]
-        if (!videoId) throw new Error('Video ID not found')
-        return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
-      }
-
-      // For youtube.com URLs
-      else if (url.hostname.includes('youtube.com')) {
-        const videoId = url.searchParams.get('v')
-        if (!videoId) throw new Error('Video ID not found')
-        return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
-      }
-
-      // Invalid URL
-      else {
-        throw new Error('Invalid YouTube URL')
-      }
-    } catch (error) {
-      console.error('Error parsing video URL:', error)
-      return '/default-thumbnail.jpg' // Return default image on error
-    }
-  }
-
   return (
     <div className="wrapper text-white sm:pt-[37px] pt-[59px]">
       <p className="sm:text-center sm:text-[32px] tracking-wide sm:tracking-wider">
