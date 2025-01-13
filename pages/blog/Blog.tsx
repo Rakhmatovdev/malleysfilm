@@ -10,42 +10,28 @@ import Image from "next/image";
 import BlogSkeleton from "./BlogSkleton";
 
 const BlogUI = () => {
-  // const { isPending, error, data:blogs } = useQuery({
-  //   queryKey: ['blogs'],
-  //   queryFn: restService.blogs,
-  // })
-
-    // const blog1:{date:string}=blogs?.splice(0,1)[0]
-    // console.log(blog1);
+  const { isPending, data:blogs } = useQuery({
+    queryKey: ['blogs'],
+    queryFn: restService.blogs,
+  })
     
 
-    // if(isPending){
-    //  return (<BlogSkeleton/>)
-    // }
+    if(isPending){
+     return (<BlogSkeleton/>)
+    }
   
   
   return (
     <div className="Gradient">
    <div className="pt-10 sm:pt-24 text-white wrapper  pb-[145px]">
-      ( <div className="">
-          <p className="sm:text-[18px] font-bold">1 January 2023</p>
-          <p className="text-red-500 font-bold text-2xl tracking-wide  sm:text-[48px] mt-6 w-[300px] sm:w-full">Bill Walsh leadership lessons</p>
+     {blogs && ( <div className="">
+          <p className="sm:text-[18px] font-bold">{format(blogs[0]?.date,'dd MMMM yyyy')}</p>
+          <p className="text-red-500 font-bold text-2xl tracking-wide  sm:text-[48px] mt-6 w-[300px] sm:w-full">{blogs[0].name}</p>
           <p className="text-sm tracking-wide sm:text-[22px] leading-8 mt-4 line-clamp-4 sm:line-clamp-none">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in
-            voluptate
+            {blogs[0].text}
           </p>
-          <div className="mt-5 sm:mt-[41px] sm:w-full sm:h-full  "><Image className="rounded-2xl bg-transparent bg-cover bg-center   sm:h-min " src={Fimage} height={645} width={1728} alt="Featured image Blog"/></div>
-        </div>)
+          <div className="mt-5 sm:mt-[41px] sm:w-full sm:h-full  "><Image className="rounded-2xl bg-transparent bg-cover bg-center   sm:h-min " src={blogs[0].image} height={645} width={1728} alt="Featured image Blog"/></div>
+        </div>)}
         
         <div className="mt-10 sm:mt-[90px]">
          <div className="flex items-center gap-x-2">
@@ -53,19 +39,19 @@ const BlogUI = () => {
           <p className="sm:text-[40px] font-bold tracking-wider">Blogs</p>
          </div>
          <div className="pt-6 grid justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 sm:gap-x-10  md:gap-x-12 lg:gap-x-14 gap-y-[71px]">
-          {BlogData.map((blog)=><div key={blog.id} className="" >
-            <Image src={blog.image} width={385} height={240} alt={blog.title}/>
-            <p className="mt-8 text-sm font-bold">1 Jasuary 2023</p>  
-            {/* { format(blog1?.date,'dd MMMM yyyy')} */}
+          {blogs && blogs.filter(item=>item.id!='2003').map((blog)=><div key={blog.id} className="" >
+            <Image src={blog.image} width={385} height={240} alt={blog.name}/>
+            <p className="mt-8 text-sm font-bold">{format(blog.date,'dd MMMM yyyy')}</p>  
+          
            <div className="mt-3 fij">
-           <p className=" text-[20px] font-bold">{blog.title}</p>
+           <p className=" text-[20px] font-bold line-clamp-1">{blog.name}</p>
            <ArrowUpOutlined className="rotate-45 text-xl mt-2 cursor-pointer"/>
            </div>
-            <p className="mt-3 text-[#C0C5D0] w-[320px]">{blog.description}</p>
+            <p className="mt-3 text-[#C0C5D0] w-[320px] line-clamp-3">{blog.text}</p>
             <div className="mt-6 fij">
-              <p className="text-sm cursor-pointer text-[#C94552] px-[14px] py-2 rounded-2xl bg-[#F9F5FF]">{blog.skils[0]}</p>
-              <p className="text-sm cursor-pointer text-[#141414] px-[14px] py-2 rounded-2xl bg-[#F8F9FC]">{blog.skils[1]}</p>
-              <p className="text-sm cursor-pointer text-[#185366] px-[14px] py-2 rounded-2xl bg-[#D9F6FF]">{blog.skils[2]}</p>
+              <p className="text-sm cursor-pointer text-[#C94552] px-[14px] py-2 rounded-2xl bg-[#F9F5FF]">Leadership</p>
+              <p className="text-sm cursor-pointer text-[#141414] px-[14px] py-2 rounded-2xl bg-[#F8F9FC]">Management</p>
+              <p className="text-sm cursor-pointer text-[#185366] px-[14px] py-2 rounded-2xl bg-[#D9F6FF]">Presentation</p>
             </div>
 
           </div>)}

@@ -31,7 +31,7 @@ export const endpoints = {
     get: '/messages/',
   },
   portfolios: {
-    get: '/portfolios/',
+    get: '/portfolio/',
   },
   services: {
     get: '/services/',
@@ -53,5 +53,14 @@ export const endpoints = {
   },
   reviews:{
     get: '/reviews/',
+  },
+  projects:{
+    get: '/projects/',
+  },
+  contacts:{
+    post: '/contacts/',
+  },
+  email:{
+    post: '/emails/',
   }
 };

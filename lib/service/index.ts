@@ -1,4 +1,4 @@
-import { Tabout, Tblog, Tfooter, Tgallerie, Tmessage, Tportfolio, Treviews, Tservices } from "@/types/types";
+import { Tabout, Tblog, Tcontacts, Temails, Tfooter, Tgallerie, Tmessage, Tportfolio, Tprojects, Treviews, Tservices, Tteams } from "@/types/types";
 import apiClient, { endpoints } from "./restApi";
 
 export const restService = {
@@ -70,7 +70,7 @@ export const restService = {
 
     blogs: async ()=> {
         try {
-            const response = await apiClient.get(endpoints.blogs.get);
+            const response = await apiClient.get<Tblog[]>(endpoints.blogs.get);
             return response.data;
         } catch (error) {
             console.error("Blogs failed", error);
@@ -258,7 +258,7 @@ export const restService = {
 
     portfolios: async ()=> {
         try {
-            const response = await apiClient.get(endpoints.portfolios.get);
+            const response = await apiClient.get<Tportfolio[]>(endpoints.portfolios.get);
             return response.data;
         } catch (error) {
             console.error("Portfolios failed", error);
@@ -506,7 +506,7 @@ export const restService = {
 
     teams: async ()=> {
         try {
-            const response = await apiClient.get(endpoints.teams.get);
+            const response = await apiClient.get<Tteams[]>(endpoints.teams.get);
             return response.data;
         } catch (error) {
             console.error("Teams failed", error);
@@ -637,6 +637,7 @@ export const restService = {
             throw new Error("About failed. Please check your credentials and try again.");
         }
     },
+
     //Reviews
     
     reviews: async ()=> {
@@ -648,6 +649,43 @@ export const restService = {
             throw new Error("About failed. Please check your credentials and try again.");
         }
     },
+
+    //Projects
+    
+    projects: async ()=> {
+        try {
+            const response = await apiClient.get<Tprojects[]>(endpoints.projects.get);
+            return response.data;
+        } catch (error) {
+            console.error("Projects failed", error);
+            throw new Error("Projects failed. Please check your credentials and try again.");
+        }
+    },
+
+    //Contacts
+
+    contacts: async (data:Tcontacts)=> {
+        try {
+            const response = await apiClient.post<Tcontacts>(endpoints.contacts.post,data);
+            return response.data;
+        } catch (error) {
+            console.error("Contacts failed", error);
+            throw new Error("Contacts failed. Please check your credentials and try again.");
+        }
+    },
+
+    //Emails
+
+    email: async (data:Temails)=> {
+        try {
+            const response = await apiClient.post<Temails>(endpoints.email.post,data);
+            return response.data;
+        } catch (error) {
+            console.error("Email failed", error);
+            throw new Error("Email failed. Please check your credentials and try again.");
+        }
+    },
+
 
 
 

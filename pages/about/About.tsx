@@ -3,10 +3,6 @@ import BG from "@/public/images/Rectangle-bg.png";
 import logo from "@/public/Logo.svg";
 import ustun from "@/public/Vector.svg";
 import Navbar from "../rootapp/Navbar";
-import Mission1 from "@/public/images/Mission1.png";
-import Mission2 from "@/public/images/Mission2.png";
-import Vision1 from "@/public/images/Vision3.png";
-import Vision2 from "@/public/images/Vision4.png";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import restService from "@/lib/service";
@@ -82,7 +78,7 @@ console.log(galleries);
             <div className="absolute left-[43px] top-[50px]  z-10 sm:top-[147px] sm:left-[80px]">
               <Image
                 className="w-[148px] h-[113px] sm:w-[432px] sm:h-[285px] rounded-2xl sm:rounded-3xl"
-                src={galleries[0]?.images[0]?.image || Mission1.src}
+                src={galleries[0]?.images[0]?.image }
                 width={432}
                 height={285}
                 alt="Mission image 1"
@@ -91,7 +87,7 @@ console.log(galleries);
             <div className="absolute left-[138px] sm:left-[313px] z-20">
               <Image
                 className="w-[148px] h-[113px] sm:w-[432px] sm:h-[285px] rounded-2xl sm:rounded-3xl"
-                src={galleries[0]?.images[1]?.image ||  Mission2.src }
+                src={galleries[0]?.images[1]?.image }
                 width={432}
                 height={285}
                 alt="Mission image 2"
@@ -120,7 +116,7 @@ console.log(galleries);
             <div className="absolute top-[46px] left-[37px] sm:left-20 z-20 sm:top-[113px] ">
               <Image
                 className="w-[148px] h-[113px] sm:w-[432px] sm:h-[285px] rounded-2xl sm:rounded-3xl "
-                src={Vision1.src}
+                src={galleries[1]?.images[0]?.image}
                 width={432}
                 height={285}
                 alt="Mission image 3"
@@ -129,7 +125,7 @@ console.log(galleries);
             <div className="absolute top-[122px] left-[137px] sm:left-[315px] sm:top-[305px] z-20">
               <Image
                 className="w-[148px] h-[113px] sm:w-[432px] sm:h-[285px] rounded-2xl sm:rounded-3xl"
-                src={Vision2.src}
+                src={galleries[1]?.images[1]?.image}
                 width={432}
                 height={285}
                 alt="Mission image 4"

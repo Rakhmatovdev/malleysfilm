@@ -1,31 +1,53 @@
 'use client'
+import restService from "@/lib/service";
+import { Tcontacts } from "@/types/types";
 import {
   ArrowUpOutlined,
   FacebookOutlined,
   InstagramOutlined,
   TwitterOutlined,
 } from "@ant-design/icons";
+import { useMutation } from "@tanstack/react-query";
+import { message } from "antd";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-
-type Inputs = {
-  name: string,
-  address: string,
-  phone:number,
-  message:string
-};
-
-
 const ContactUI = () => {
-  const { register, handleSubmit } = useForm<Inputs>();
-const [email, setEmail] = useState('')
+  const { register, handleSubmit,reset } = useForm<Tcontacts>();
+  const [email, setEmail] = useState('')
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const {mutate:emailSent}=useMutation({
+    mutationKey:['email'],
+    mutationFn: restService.email ,
+    onSuccess: () => {
+    message.success("Email send successfully ");
+    setEmail('');
+    },
+    onError: (error) => {
+        console.error('Mutation failed:', error);
+      },
+    })
+    
+    const {mutate}=useMutation({
+      mutationKey:['contact'],
+      mutationFn: restService.contacts ,
+      onSuccess: () => {
+      message.success("Message send successfully ");
+      reset();
+      },
+      onError: (error) => {
+          console.error('Mutation failed:', error);
+      },
+  })
+
+  const onSubmit: SubmitHandler<Tcontacts> = (data) => {
     console.log("Submit 1:", data);
+    mutate(data);
   };
-  const onSubmit2 = (data:any) => {
-    console.log("Submit 2:", data);
+  const onSubmit2 = (e:any) => {
+e.preventDefault();
+    console.log("Submit 2:", {email});
+    emailSent({email});
   };
 
   return (
@@ -63,10 +85,10 @@ const [email, setEmail] = useState('')
               type="text"
               className="w-full  border-b-2 bg-transparent placeholder:text-white outline-none px-[10px] pt-[10px] pb-7 sm:text-2xl border-stone-500"
               placeholder="Email Address"
-              {...register("address")}
+              {...register("email")}
             />
             <input
-              type="number"
+              type="phone"
               className="w-full  border-b-2 bg-transparent placeholder:text-white outline-none px-[10px] pt-[10px] pb-7 sm:text-2xl border-stone-500"
               placeholder="Phone Number (optional)"
               {...register("phone")}
@@ -84,7 +106,7 @@ const [email, setEmail] = useState('')
             <p  className="text-[24px] font-semibold  tracking-wider">
               Leave us a Message
             </p>
-            <div className="border-[3px]   border-black flex justify-center items-center    rounded-lg w-6 h-6">
+            <div className="border-[3px]   border-black flex justify-center items-center rounded-lg w-6 h-6">
               <ArrowUpOutlined className="rotate-45 text-sm font-bold" />
             </div>
           </button>
@@ -109,7 +131,7 @@ const [email, setEmail] = useState('')
               </div>
               <div className="mt-[27px]">
                 <p className="text-[22px] font-semibold tracking-wide">
-                  help@info.com
+                  rakhmatovjasur3@info.com
                 </p>
                 <p className="text-[20px] w-[216px] mt-6">
                   Assistance hours: Monday - Friday 6 am to 8 pm EST
@@ -118,12 +140,12 @@ const [email, setEmail] = useState('')
             </div>
             <div className="p-7 sm:p-8">
               <div className="text-[22px] font-semibold tracking-wider">
-                <p> Number</p>
+                <p>Number</p>
                 <div className="w-[27px] h-[3px] bg-black mt-6"></div>
               </div>
               <div className="mt-[27px]">
                 <p className="text-[22px] font-semibold tracking-wide">
-                  (808) 998-34256
+                  +998 (94)-976-09-06
                 </p>
                 <p className="text-[20px] w-[216px] mt-6">
                   Assistance hours: Monday - Friday 6 am to 8 pm EST
@@ -143,7 +165,7 @@ const [email, setEmail] = useState('')
           </p>
         </div>
         <form onSubmit={onSubmit2} className="sm:w-[550px] h-[47px] sm:h-[84px] flex flex-row mt-6  sm:mt-0 w-full">
-          <input type="text" className="rounded-l-xl bg-[#5a6666] outline-none placeholder:text-white text-[18px] p-6 w-full" placeholder="Enter your email"/>
+          <input type="text" onChange={(e)=>setEmail(e.target.value)}  className="rounded-l-xl bg-[#5a6666] outline-none placeholder:text-white text-[18px] p-6 w-full" placeholder="Enter your email"/>
           <button type="submit" className="px-2  sm:p-6 bg-white rounded-r-xl sm:text-[18px] text-[#1A3231]">Subscribe</button>
         </form>
       </div>

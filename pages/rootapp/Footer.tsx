@@ -2,39 +2,46 @@
 import { AboutFooter, HelpsFooter, ServicesFooter } from "@/assets/data";
 import restService from "@/lib/service";
 import Logo from "@/public/Logo.svg";
-import { Inputs } from "@/types/types";
 import {
   FacebookOutlined,
   InstagramOutlined,
   RightOutlined,
   TwitterOutlined
 } from '@ant-design/icons';
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Image from 'next/image';
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
 import SocialLinksSkeleton from "./SocialLink";
-
+import { message } from "antd";
+import { Temails } from "@/types/types";
 
 const Footer = () => {
-  const { register, handleSubmit } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
+  const { register, handleSubmit,reset } = useForm<Temails>();
 
-
-  const { isPending, error, data:footer} = useQuery({
+  const {data:footer} = useQuery({
     queryKey: ['footer'],
     queryFn: restService.footer,
   })
 
+  const {mutate:emailSent}=useMutation({
+    mutationKey:['email'],
+    mutationFn: restService.email,
+    onSuccess: () => {
+    message.success("Email send successfully");
+    },
+    onError: (error) => {
+        console.error('Mutation failed:', error);
+      },
+    })
 
-  console.log(footer);
+    const onSubmit: SubmitHandler<Temails> =({email}:Temails) =>{
+    emailSent({email});
+    reset()
+    };
   
-
- if(error){
-   return <div>Error...</div>
- }
   return (
-    <div className=' text-white bg-gradient-to-t from-[#0C8386]  to-[#2F5A5B]'>
+    <div className='text-white bg-gradient-to-t from-[#0C8386]  to-[#2F5A5B]'>
       <div className=" ">
    <div className=" pt-11 fij wrapper">
     <Link href={"/"} className="sm:ml-[151px]"><Image src={Logo} width={109} height={85} className="w-[55px] h-[43px] sm:w-[109px] sm:h-[85px] cursor-pointer" alt='Logo'/></Link>

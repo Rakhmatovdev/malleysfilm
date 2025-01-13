@@ -1,4 +1,4 @@
-
+'use client'
 import Link from 'next/link'
 import ustun from "@/public/Vector.svg";
 import Image from 'next/image';
@@ -11,8 +11,22 @@ import Image6 from "@/public/Portfolio-Image6.png";
 import Image7 from "@/public/Portfolio-Image7.png";
 import Image8 from "@/public/Portfolio-Image8.png";
 import play from "@/public/Subtract.svg";
+import { useQuery } from '@tanstack/react-query';
+import restService from '@/lib/service';
+import PSkleton from './PSkleton';
+import SPortfolio from './PSkleton';
 
 const PortfolioR = () => {
+  const { data: portfolios,isPending} = useQuery({
+    queryKey: ["portfolios"],
+    queryFn: restService.portfolios,
+  });
+  console.log(portfolios);
+
+if(isPending){
+  return <SPortfolio/>
+}
+  
   return (<>
 
  
@@ -38,199 +52,108 @@ const PortfolioR = () => {
   </div>
   <div className="mt-6 sm:mt-[50px]">
         <div className="fij">
-          <div className="relative">
-            <Image
+          <div className="relative max-w-[600px] max-h-[350px]"    style={{ width: "600px", height: "350px" }}>
+            {/* <Image
               className="bg-cover bg-center"
               src={Image1.src}
               width={600}
               height={350}
               alt="Portfolio image 1"
-            />
-            <div className="absolute top-[50%] left-[50%] -translate-y-1/2 -translate-x-1/2">
-              <Image
-                className="w-5 h-5 lg:w-[60px] lg:h-[60px] cursor-pointer"
-                src={play.src}
-                width={60}
-                height={60}
-                alt="Play image"
-              />
-              <p className="text-white text-[12px] sm:text-2xl -translate-x-2.5 sm:pt-5">
-                Brahma
-              </p>
-              <p className="-translate-x-3 sm:-translate-x-5 text-[8px] sm:text-base text-white">
-                Hernan Almar
-              </p>
-            </div>
+            /> */}
+             {portfolios && (<iframe
+          className="absolute inset-0 w-full h-full"
+          src={portfolios[0].video_url}
+          title={portfolios[0].author}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          frameBorder="0"
+          
+        ></iframe>)}
+           
           </div>
-          <div className="relative">
-            <Image
-              className="bg-cover bg-center"
-              src={Image2.src}
-              width={315}
-              height={350}
-              alt="Portfolio image 2"
-            />
-            <div className="absolute top-[50%] left-[50%] -translate-y-1/2 -translate-x-1/2">
-              <Image
-                className="cursor-pointer w-5 h-5 lg:w-[60px] lg:h-[60px]"
-                src={play.src}
-                width={60}
-                height={60}
-                alt="Play image"
-              />
-              <p className="text-white text-[12px] sm:text-2xl -translate-x-2.5 sm:pt-5">
-                Brahma
-              </p>
-              <p className="text-[8px] sm:text-base -translate-x-3  sm:-translate-x-5 text-white">
-                Hernan Almar
-              </p>
-            </div>
+          <div className="relative max-w-[315px] max-h-[350px]"    style={{ width: "315px", height: "350px" }}>
+          {portfolios && (<iframe
+          className="absolute inset-0 w-full h-full"
+          src={portfolios[1].video_url}
+          title={portfolios[1].author}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          frameBorder="0"
+          
+        ></iframe>)}
+            
           </div>
-          <div className="relative">
-            <Image
-              className="bg-cover bg-center"
-              src={Image3.src}
-              width={535}
-              height={350}
-              alt="Portfolio image 3"
-            />
-            <div className="absolute top-[50%] left-[50%] -translate-y-1/2 -translate-x-1/2">
-              <Image
-                className="cursor-pointer w-5 h-5 lg:w-[60px] lg:h-[60px]"
-                src={play.src}
-                width={60}
-                height={60}
-                alt="Play image"
-              />
-              <p className="text-white text-[12px] sm:text-2xl -translate-x-2.5 sm:pt-5">
-                Brahma
-              </p>
-              <p className="text-[8px] sm:text-base -translate-x-3  sm:-translate-x-5 text-white">
-                Hernan Almar
-              </p>
-            </div>
+          <div className="relative max-w-[535px] max-h-[350px]"    style={{ width: "535px", height: "350px" }}>
+          {portfolios && (<iframe
+          className="absolute inset-0 w-full h-full"
+          src={portfolios[2].video_url}
+          title={portfolios[2].author}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          frameBorder="0"
+          
+        ></iframe>)}
+           
           </div>
-          <div className="relative">
-            <Image
-              className="bg-cover bg-center"
-              src={Image4.src}
-              width={470}
-              height={350}
-              alt="Portfolio image 3"
-            />
-            <div className="absolute top-[50%] left-[50%] -translate-y-1/2 -translate-x-1/2">
-              <Image
-                className="cursor-pointer w-5 h-5 lg:w-[60px] lg:h-[60px]"
-                src={play.src}
-                width={60}
-                height={60}
-                alt="Play image"
-              />
-              <p className="text-white text-[12px] sm:text-2xl -translate-x-2.5 sm:pt-5">
-                Brahma
-              </p>
-              <p className="text-[8px] sm:text-base -translate-x-3  sm:-translate-x-5 text-white">
-                Hernan Almar
-              </p>
-            </div>
+          <div className="relative  max-w-[470px] max-h-[350px]"    style={{ width: "470px", height: "350px" }}>
+          {portfolios && (<iframe
+          className="absolute inset-0 w-full h-full"
+          src={portfolios[3].video_url}
+          title={portfolios[3].author}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          frameBorder="0"
+          
+        ></iframe>)}
           </div>
         </div>
         <div className="fij">
-          <div className="relative">
-            <Image
-              className="bg-cover bg-center"
-              src={Image5.src}
-              width={318}
-              height={350}
-              alt="Portfolio image 4"
-            />
-            <div className="absolute top-[50%] left-[50%] -translate-y-1/2 -translate-x-1/2">
-              <Image
-                className="cursor-pointer w-5 h-5 lg:w-[60px] lg:h-[60px]"
-                src={play.src}
-                width={60}
-                height={60}
-                alt="Play image"
-              />
-              <p className="text-white text-[12px] sm:text-2xl -translate-x-2.5 sm:pt-5">
-                Brahma
-              </p>
-              <p className="text-[8px] sm:text-base -translate-x-3  sm:-translate-x-5 text-white">
-                Hernan Almar
-              </p>
-            </div>
+          <div className="relative max-w-[318px] max-h-[350px]"    style={{ width: "318px", height: "350px" }}>
+          {portfolios && (<iframe
+          className="absolute inset-0 w-full h-full"
+          src={portfolios[4].video_url}
+          title={portfolios[4].author}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          frameBorder="0"
+          
+        ></iframe>)}
+          
+            
           </div>
-          <div className="relative">
-            <Image
-              className="bg-cover bg-center"
-              src={Image6.src}
-              width={471}
-              height={350}
-              alt="Portfolio image 5"
-            />
-            <div className="absolute top-[50%] left-[50%] -translate-y-1/2 -translate-x-1/2">
-              <Image
-                className="cursor-pointer w-5 h-5 lg:w-[60px] lg:h-[60px]"
-                src={play.src}
-                width={60}
-                height={60}
-                alt="Play image"
-              />
-              <p className="text-white text-[12px] sm:text-2xl -translate-x-2.5 sm:pt-5">
-                Brahma
-              </p>
-              <p className="text-[8px] sm:text-base -translate-x-3  sm:-translate-x-5 text-white">
-                Hernan Almar
-              </p>
-            </div>
+          <div className="relative max-w-[471px] max-h-[350px]"    style={{ width: "471px", height: "350px" }}>
+          {portfolios && (<iframe
+          className="absolute inset-0 w-full h-full"
+          src={portfolios[5].video_url}
+          title={portfolios[5].author}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          frameBorder="0"
+          
+        ></iframe>)}
+          
           </div>
-          <div className="relative">
-            <Image
-              className="bg-cover bg-center"
-              src={Image7.src}
-              width={535}
-              height={350}
-              alt="Portfolio image 6"
-            />
-            <div className="absolute top-[50%] left-[50%] -translate-y-1/2 -translate-x-1/2">
-              <Image
-                className="cursor-pointer w-5 h-5 lg:w-[60px] lg:h-[60px]"
-                src={play.src}
-                width={60}
-                height={60}
-                alt="Play image"
-              />
-              <p className="text-white text-[12px] sm:text-2xl -translate-x-2.5 sm:pt-5">
-                Brahma
-              </p>
-              <p className="text-[8px] sm:text-base -translate-x-3  sm:-translate-x-5 text-white">
-                Hernan Almar
-              </p>
-            </div>
+          <div className="relative max-w-[535px] max-h-[350px]"    style={{ width: "535px", height: "350px" }}>
+          {portfolios && (<iframe
+          className="absolute inset-0 w-full h-full"
+          src={portfolios[6].video_url}
+          title={portfolios[6].author}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          frameBorder="0"
+          
+        ></iframe>)}
           </div>
-          <div className="relative">
-            <Image
-              className="bg-cover bg-center"
-              src={Image8.src}
-              width={599}
-              height={350}
-              alt="Portfolio image 7"
-            />
-            <div className="absolute top-[50%] left-[50%] -translate-y-1/2 -translate-x-1/2">
-              <Image
-                className="cursor-pointer w-5 h-5 lg:w-[60px] lg:h-[60px]"
-                src={play.src}
-                width={60}
-                height={60}
-                alt="Play image"
-              />
-              <p className="text-white text-[12px] sm:text-2xl -translate-x-2.5 sm:pt-5">
-                Brahma
-              </p>
-              <p className="text-[8px] sm:text-base -translate-x-3  sm:-translate-x-5 text-white">
-                Hernan Almar
-              </p>
-            </div>
+          <div className="relative max-w-[599px] max-h-[350px]"    style={{ width: "599px", height: "350px" }}>
+          {portfolios && (<iframe
+          className="absolute inset-0 w-full h-full"
+          src={portfolios[7].video_url}
+          title={portfolios[7].author}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          frameBorder="0"
+          
+        ></iframe>)}
           </div>
         </div>
       </div>

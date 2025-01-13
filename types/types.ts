@@ -1,7 +1,5 @@
 import Image from 'next/image';
-export type Inputs = {
-    email: string;
-   };
+
    
 
 export type Tabout = {
@@ -27,6 +25,7 @@ export type Tblog = {
     image:string
 };
 
+
 type Image = {
     gallery: string | number;
     id: string | number;
@@ -49,8 +48,12 @@ export type Tmessage = {
 };
 
 export type Tportfolio = {
-    name: string;
-    type: number;
+    title: string;
+    author: string;
+   text: string;
+    id: number | string;
+    video_url: string;
+ 
 };
 
 export type Tfooter= {
@@ -73,3 +76,25 @@ text: string;
     text: string;
     title: string;
  }
+export type Tteams = {
+    id: string;
+    name: string;
+    image: string;
+    position: string;
+};
+export type Tprojects = {
+    id: string;
+    name: string;
+    text: string;
+    video_url: string;
+};
+export type Tcontacts = {
+    name: string
+    email: string 
+    phone: string | number 
+    message: string
+
+};
+export type Temails = {
+    email: string 
+};
